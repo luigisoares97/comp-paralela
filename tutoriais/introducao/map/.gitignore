@@ -1,0 +1,4 @@
+# C/C++ executables and object files
+main
+*.o
+
