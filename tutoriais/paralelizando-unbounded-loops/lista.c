@@ -119,9 +119,9 @@ struct node* init_list(struct node* p) {
 
 
 int main(int argc, char *argv[]) {
-	struct node *q=NULL;
-	struct node *temp=NULL;
-	struct node *head=NULL;
+	struct node *q = NULL;
+	struct node *temp = NULL;
+	struct node *head = NULL;
 	struct node *p;
 
 	printf("Process linked list\n");
