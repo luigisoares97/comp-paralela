@@ -9,24 +9,11 @@
 
 void mm(double* a, double* b, double* c, int width) 
 {
-	/*
-	 * Collapse: cláusula utilizada quando se tem
-	 * loops ("imediatamente") aninhandos, fazendo
-	 * com que se trate os diferentes níveis de loops
-	 * como sendo um só, para distribuir as iterações
-	 * as threads.
-	 */
 	#pragma omp parallel for collapse(2) 
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < width; j++) {
 			double sum = 0;
 
-			/*
-			 * SIMD (Single-Instruction, Multiple-Data):
-			 * diretiva incluida a partir do OpenMP 4.0,
-			 * que permite a aplicação de uma única instrução
-			 * a múltiplos dados.
-			 */
 			#pragma omp simd reduction(+: sum)
 			for (int k = 0; k < width; k++) {
 				double x = a[i * width + k];
@@ -56,9 +43,9 @@ int main()
 
 	mm(a,b,c,width);
 	
-	/* for(int i = 0; i < width; i++) { */
-		/* for(int j = 0; j < width; j++) { */
-			/* printf("\n c[%d][%d] = %f",i,j,c[i*width+j]); */
-		/* } */
-	/* } */
+	for(int i = 0; i < width; i++) {
+		for(int j = 0; j < width; j++) {
+			printf("\n c[%d][%d] = %f",i,j,c[i*width+j]);
+		}
+	}
 }
